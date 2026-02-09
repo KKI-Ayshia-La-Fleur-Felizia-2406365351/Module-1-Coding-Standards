@@ -20,7 +20,6 @@ public class ProductServiceImpl implements ProductService {
         productRepository.create(product);
         return product;
     }
-
     
     @Override
     public List<Product> findAll() {
@@ -37,7 +36,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product update(Product product) {
-        return productRepository.update(product);
+        productRepository.update(product);
+        return product;
     }
 
     @Override
