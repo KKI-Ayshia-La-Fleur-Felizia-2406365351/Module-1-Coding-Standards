@@ -20,12 +20,25 @@ public class ProductController {
     public String createProductPage(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
-        return "createProduct";
+        return "productForm";
     }
 
     @PostMapping("/create")
     public String createProductPost(@ModelAttribute Product product, Model model) {
         service.create(product);
+        return "redirect:list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editProductPage(@PathVariable("id") String id, Model model) {
+        Product product = service.findById(id);
+        model.addAttribute("product", product);
+        return "productForm";
+    }
+
+    @PostMapping("/edit")
+    public String editProductPost(@ModelAttribute Product product, Model model) {
+        service.update(product);
         return "redirect:list";
     }
 
