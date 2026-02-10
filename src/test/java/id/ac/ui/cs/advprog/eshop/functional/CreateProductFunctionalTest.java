@@ -6,18 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SeleniumJupiter.class)
 
-class HomePageFunctionalTest {
+public class CreateProductFunctionalTest {
     /**
      * The port number assigned to the running application during test execution.
      * Set automatically during each test run by Spring Framework's test context.
@@ -39,23 +40,26 @@ class HomePageFunctionalTest {
     }
 
     @Test
-    void pageTitle_isCorrect(ChromeDriver driver) throws Exception {
-        // Exercise
+    void createProduct_whenValidInput_shouldAppearInProductList(ChromeDriver driver) throws Exception {
         driver.get(baseUrl);
-        String pageTitle = driver.getTitle();
+        WebElement productListButton = driver.findElement(By.name("productListButton"));
+        productListButton.click();
 
-        // Verify
-        assertEquals("ADV Shop", pageTitle);
+        WebElement createButton = driver.findElement(By.name("createProductButton"));
+        createButton.click();
+
+        WebElement nameInput = driver.findElement(By.name("productName"));
+        WebElement quantityInput = driver.findElement(By.name("productQuantity"));
+
+        nameInput.sendKeys("Sampo Cap Bambang");
+        quantityInput.clear();
+        quantityInput.sendKeys("100");
+
+        WebElement submitButton = driver.findElement(By.name("submitButton"));
+        submitButton.click();
+
+        String pageSource = driver.getPageSource();
+        assertTrue(pageSource.contains("Sampo Cap Bambang"));
     }
 
-    @Test
-void welcomeMessage_homePage_isCorrect(ChromeDriver driver)  throws Exception {
-        // Exercise
-        driver.get(baseUrl);
-        String welcomeMessage = driver.findElement(By.tagName("h3"))
-                                      .getText();
-
-        // Verify
-        assertEquals("Welcome", welcomeMessage);
-    }
 }
