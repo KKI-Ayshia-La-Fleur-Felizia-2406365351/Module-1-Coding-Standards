@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
-@WebMvcTest(ProductController.class)
+@WebMvcTest(controllers = ProductController.class,  properties = "spring.thymeleaf.enabled=false")
 class ProductControllerTest {
 
     @Autowired
