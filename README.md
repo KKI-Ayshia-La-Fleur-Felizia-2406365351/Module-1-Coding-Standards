@@ -21,3 +21,15 @@ need to change much of the source code tests. I also added element names since t
    code structure. To make the code cleaner, we can make a base test class, where it will handle all shared setup
    such as the start WebDriver, open browser, etc. We can also make a Page Object Model to represent
    webpage as an object.
+
+# Module-2-CI/CD-&-DevOps
+
+## Reflection
+1. My previous code coverage is 34%, i have improved it to 96% by adding unit tests
+for ProductController and some missed codes on ProductRepository. I also just realized that my templates
+file names were wrong, so i've fixed it too.
+2. Yes. Because for every push on every branch, it will trigger the GitHub action that will run
+automatic tests that i've configured. Since it's deployed on Heroku, it will also automatically build
+the app for every push on main. From the definition of CI/CD, i've implemented both continuos integration on every push
+   (runs the tests) and it will automatically deploy on Heroku.
+
