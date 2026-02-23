@@ -35,6 +35,25 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void findById_whenProductExist_shouldReturnProduct() {
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product found = productRepository.findById(product.getProductId());
+        assertNotNull(found);
+        assertEquals(product.getProductId(), found.getProductId());
+    }
+
+    @Test
+    void findById_whenProductDoesNotExist_shouldReturnNull() {
+        String id = "wrong-id";
+        Product found = productRepository.findById(id);
+        assertNull(found);
+    }
+
+    @Test
     void testFindAllIfEmpty() {
         Iterator<Product> productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());
