@@ -33,3 +33,26 @@ automatic tests that i've configured. Since it's deployed on Heroku, it will als
 the app for every push on main. From the definition of CI/CD, i've implemented both continuos integration on every push
    (runs the tests) and it will automatically deploy on Heroku.
 
+# Module-3-Maintainability-&-OO-Principles
+
+## Reflection
+1. Explain what principles you apply to your project!
+The overall code has followed the SOLID principle, with some included changes: 
+SRP on ProductController, i separated the CarController and ProductController. 
+DIP issues on CarController, where the controller accessed CarServiceImpl directly, when it should access CarService.
+Other than that, i've implemented SRP by separating concerns by layer (controllers, services, repositories), OCP by making the
+app extendable by domain/service separation, LSP by making my service implementations substitutable for their interfaces, 
+ISP by focusing interface per domain, and DIP by making each controller depend on an abstraction.
+
+2. Explain the advantages of applying SOLID principles to your project with examples.
+Easier maintenance: ProductController, ProductServiceImpl, and ProductRepository are separated, so changing UI flow usually won’t break storage logic.
+Safer feature extension: adding Car features with separate CarController/CarService/CarRepository avoids touching product code too much.
+Better testability: interfaces like ProductService make mocking and unit testing controllers/services easier.
+Lower coupling: ProductController depends on ProductService (abstraction), so implementation can change with less impact.
+
+3. Explain the disadvantages of not applying SOLID principles to your project with examples.
+Harder to test: when depending on concrete classes (like CarController -> CarServiceImpl), mocking is harder and tests become brittle.
+Reduced flexibility: if service depends directly on concrete repository, swapping in-memory storage to database storage needs broader rewrites.
+Higher bug risk: one class handling multiple domains (e.g., product + car in one controller) increases accidental regressions.
+Code becomes harder to read over time: responsibilities blur, so new contributors need more time to understand where to implement changes.
+Change ripple effects: if controller and business logic are mixed, a small request change can force edits across many methods
