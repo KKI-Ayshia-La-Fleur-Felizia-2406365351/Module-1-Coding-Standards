@@ -32,6 +32,7 @@ file names were wrong, so i've fixed it too.
 automatic tests that i've configured. Since it's deployed on Heroku, it will also automatically build
 the app for every push on main. From the definition of CI/CD, i've implemented both continuos integration on every push
    (runs the tests) and it will automatically deploy on Heroku.
+   [App Link](https://eshop-ayshialafleur-75c4bb44f15a.herokuapp.com/) 
 
 # Module-3-Maintainability-&-OO-Principles
 
