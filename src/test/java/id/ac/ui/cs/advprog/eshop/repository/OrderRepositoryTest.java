@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderRepositoryTest {
     OrderRepository orderRepository;
 
-    List<Order> order;
+    List<Order> orders;
 
     @BeforeEach
     void setUp() {
